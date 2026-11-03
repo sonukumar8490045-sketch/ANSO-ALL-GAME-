@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-cyber: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-tech: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    background-color: #050711;
+    color: #e2e8f0;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    user-select: none;
+  }
+}
+
+.font-cyber {
+  font-family: var(--font-cyber);
+}
+
+.font-tech {
+  font-family: var(--font-tech);
+}
+
+/* Custom glow utility classes */
+.glow-cyan {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.45), 0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+.glow-purple {
+  box-shadow: 0 0 15px rgba(189, 0, 255, 0.45), 0 0 30px rgba(189, 0, 255, 0.2);
+}
+
+.glow-gold {
+  box-shadow: 0 0 15px rgba(255, 190, 11, 0.45), 0 0 30px rgba(255, 190, 11, 0.2);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.7);
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 12px rgba(189, 0, 255, 0.7);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 12px rgba(255, 190, 11, 0.8);
+}
+
+/* Cyber grid background */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(189, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080c1d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e294b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff;
+}

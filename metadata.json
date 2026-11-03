@@ -1,0 +1,8 @@
+{
+  "name": "FUTURE FUSION GAMES",
+  "description": "Premium 3D futuristic online gaming platform with neon visuals, interactive 3D slot machines, deep sea 3D fishing tournaments, cyber avatar customizer, casino fusion games, VIP rewards, and player wallet.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
