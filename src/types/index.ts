@@ -20,7 +20,7 @@ export interface SlotThemeConfig {
   description: string;
 }
 
-export type GameCategory = 'all' | 'slots' | 'fishing' | 'fusion' | 'avatar' | 'vip';
+export type GameCategory = 'all' | 'slots' | 'fishing' | 'racer' | 'crash' | 'fusion' | 'avatar' | 'cinema' | 'vip';
 
 export interface GameMetadata {
   id: string;

@@ -4,8 +4,12 @@ import { Footer } from './components/layout/Footer';
 import { HomeDashboard } from './components/dashboard/HomeDashboard';
 import { SlotMachine3D } from './components/3d/SlotMachine3D';
 import { FishingGame3D } from './components/3d/FishingGame3D';
+import { CyberRacer3D } from './components/3d/CyberRacer3D';
 import { AvatarStudio3D } from './components/3d/AvatarStudio3D';
 import { FusionGames } from './components/games/FusionGames';
+import { CyberCrashRocket } from './components/games/CyberCrashRocket';
+import { CyberVideoPlayer } from './components/media/CyberVideoPlayer';
+import { FileVaultModal } from './components/download/FileVaultModal';
 import { WalletModal } from './components/wallet/WalletModal';
 import { VipRewardsModal } from './components/vip/VipRewardsModal';
 import { AdminDashboardModal } from './components/admin/AdminDashboardModal';
@@ -18,13 +22,14 @@ import confetti from 'canvas-confetti';
 
 export default function App() {
   // Navigation & View state
-  const [currentView, setCurrentView] = useState<'lobby' | 'slot' | 'fishing' | 'fusion' | 'avatar'>('lobby');
+  const [currentView, setCurrentView] = useState<'lobby' | 'slot' | 'fishing' | 'racer' | 'crash' | 'fusion' | 'avatar' | 'cinema'>('lobby');
   const [selectedSlotTheme, setSelectedSlotTheme] = useState<SlotThemeId>('dragon');
 
   // Modals state
   const [walletOpen, setWalletOpen] = useState<boolean>(false);
   const [vipOpen, setVipOpen] = useState<boolean>(false);
   const [adminOpen, setAdminOpen] = useState<boolean>(false);
+  const [fileVaultOpen, setFileVaultOpen] = useState<boolean>(false);
 
   // Persistent user state
   const [coins, setCoins] = useState<number>(() => storage.getCoins());
@@ -70,7 +75,14 @@ export default function App() {
       // Record transaction
       const newTx = storage.addTransaction({
         type: 'WIN',
-        gameTitle: currentView === 'slot' ? SLOT_THEMES[selectedSlotTheme].name : 'Fusion Game',
+        gameTitle:
+          currentView === 'slot'
+            ? SLOT_THEMES[selectedSlotTheme].name
+            : currentView === 'racer'
+            ? '3D Cyber Space Racer'
+            : currentView === 'crash'
+            ? 'Cyber Crash 2088 Rocket'
+            : 'Fusion Game',
         amount: winAmount,
         balanceAfter: coins + winAmount - bet,
       });
@@ -166,13 +178,17 @@ export default function App() {
           if (cat === 'all') setCurrentView('lobby');
           else if (cat === 'slots') setCurrentView('slot');
           else if (cat === 'fishing') setCurrentView('fishing');
+          else if (cat === 'racer') setCurrentView('racer');
+          else if (cat === 'crash') setCurrentView('crash');
           else if (cat === 'fusion') setCurrentView('fusion');
           else if (cat === 'avatar') setCurrentView('avatar');
+          else if (cat === 'cinema') setCurrentView('cinema');
         }}
         onOpenWallet={() => setWalletOpen(true)}
         onOpenVip={() => setVipOpen(true)}
         onOpenAdmin={() => setAdminOpen(true)}
         onOpenAvatar={() => setCurrentView('avatar')}
+        onOpenFileVault={() => setFileVaultOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -238,10 +254,14 @@ export default function App() {
                 setCurrentView('slot');
               }}
               onLaunchFishing={() => setCurrentView('fishing')}
+              onLaunchRacer={() => setCurrentView('racer')}
+              onLaunchCrash={() => setCurrentView('crash')}
+              onLaunchCinema={() => setCurrentView('cinema')}
               onLaunchFusion={() => setCurrentView('fusion')}
               onOpenAvatar={() => setCurrentView('avatar')}
               onOpenWallet={() => setWalletOpen(true)}
               onOpenVip={() => setVipOpen(true)}
+              onOpenFileVault={() => setFileVaultOpen(true)}
             />
           )}
 
@@ -266,6 +286,26 @@ export default function App() {
             </div>
           )}
 
+          {currentView === 'racer' && (
+            <div className="w-full flex flex-col items-center">
+              <CyberRacer3D
+                userCoins={coins}
+                onCoinsChange={handleCoinsChange}
+                onRecordWin={handleRecordWin}
+              />
+            </div>
+          )}
+
+          {currentView === 'crash' && (
+            <div className="w-full flex flex-col items-center">
+              <CyberCrashRocket
+                userCoins={coins}
+                onCoinsChange={handleCoinsChange}
+                onRecordWin={handleRecordWin}
+              />
+            </div>
+          )}
+
           {currentView === 'fusion' && (
             <FusionGames
               userCoins={coins}
@@ -276,6 +316,10 @@ export default function App() {
 
           {currentView === 'avatar' && (
             <AvatarStudio3D profile={profile} onSaveAvatar={handleSaveAvatar} />
+          )}
+
+          {currentView === 'cinema' && (
+            <CyberVideoPlayer />
           )}
         </div>
       </main>
@@ -317,6 +361,14 @@ export default function App() {
           setProfile(p);
           storage.saveProfile(p);
         }}
+      />
+
+      <FileVaultModal
+        isOpen={fileVaultOpen}
+        onClose={() => setFileVaultOpen(false)}
+        profile={profile}
+        userCoins={coins}
+        transactions={transactions}
       />
     </div>
   );

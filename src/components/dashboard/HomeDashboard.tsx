@@ -11,10 +11,14 @@ interface HomeDashboardProps {
   onClaimDaily: () => void;
   onLaunchSlot: (themeId: SlotThemeId) => void;
   onLaunchFishing: () => void;
+  onLaunchRacer: () => void;
+  onLaunchCrash: () => void;
+  onLaunchCinema: () => void;
   onLaunchFusion: () => void;
   onOpenAvatar: () => void;
   onOpenWallet: () => void;
   onOpenVip: () => void;
+  onOpenFileVault: () => void;
 }
 
 export const HomeDashboard: React.FC<HomeDashboardProps> = ({
@@ -24,10 +28,14 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
   onClaimDaily,
   onLaunchSlot,
   onLaunchFishing,
+  onLaunchRacer,
+  onLaunchCrash,
+  onLaunchCinema,
   onLaunchFusion,
   onOpenAvatar,
   onOpenWallet,
   onOpenVip,
+  onOpenFileVault,
 }) => {
   const liveWinners = [
     { user: 'CyberRunner_9', game: 'Cyber Dragon Inferno', amount: 48500, time: '2m ago' },
@@ -359,6 +367,120 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* SECTION 4: NEW 3D CYBER RACER & CYBER CRASH (USER REQUESTED NEW GAMES) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 3D Cyber Space Racer Card */}
+        <div className="rounded-3xl border border-blue-500/40 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950/60 p-6 shadow-xl flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-cyber text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/40 uppercase">
+                NEW 3D GAME
+              </span>
+              <span className="font-tech text-xs text-cyan-300 font-bold">50X WARP SPEED</span>
+            </div>
+            <h3 className="font-cyber text-2xl font-black text-white">
+              3D CYBER SPACE RACER
+            </h3>
+            <p className="font-tech text-xs md:text-sm text-slate-300 mt-2 leading-relaxed">
+              Pilot a custom delta-wing starship through an infinite glowing neon warp tunnel. Dodge red laser barrier pylons, fly through rings, collect gold cyber-orbs, and cash out multipliers before shields collapse.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              sound.playUiClick();
+              onLaunchRacer();
+            }}
+            className="mt-6 w-full py-3 rounded-xl font-cyber font-black text-xs md:text-sm bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:brightness-110 transition cursor-pointer"
+          >
+            PLAY 3D SPACE RACER
+          </button>
+        </div>
+
+        {/* Cyber Crash 2088 Rocket Card */}
+        <div className="rounded-3xl border border-rose-500/40 bg-gradient-to-br from-slate-950 via-slate-900 to-rose-950/60 p-6 shadow-xl flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-cyber text-[10px] font-bold px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-400/40 uppercase">
+                NEW MULTIPLIER GAME
+              </span>
+              <span className="font-tech text-xs text-yellow-400 font-bold">UP TO 100X</span>
+            </div>
+            <h3 className="font-cyber text-2xl font-black text-white">
+              CYBER CRASH 2088
+            </h3>
+            <p className="font-tech text-xs md:text-sm text-slate-300 mt-2 leading-relaxed">
+              Watch the cybernetic quantum rocket ascend with exponential multipliers. Time your nerve and hit Cash Out before the hyperdrive detonates. Compete live with online simulated pilots!
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              sound.playUiClick();
+              onLaunchCrash();
+            }}
+            className="mt-6 w-full py-3 rounded-xl font-cyber font-black text-xs md:text-sm bg-gradient-to-r from-rose-500 via-purple-600 to-pink-500 text-white shadow-[0_0_20px_rgba(244,63,94,0.4)] hover:brightness-110 transition cursor-pointer"
+          >
+            PLAY CYBER CRASH ROCKET
+          </button>
+        </div>
+      </div>
+
+      {/* SECTION 5: 3D FUTURE VIDEO & FILE VAULT BANNER (USER REQUESTED VIDEO & FILES) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 3D Holo-Cinema Video Card */}
+        <div className="rounded-3xl border border-cyan-500/40 bg-slate-950 p-6 shadow-xl flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-cyber text-[10px] font-bold px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 uppercase">
+                HOLO-THEATER
+              </span>
+              <span className="font-tech text-xs text-slate-400">4K 60FPS</span>
+            </div>
+            <h3 className="font-cyber text-xl font-black text-white">
+              3D FUTURE CINEMATIC TRAILERS
+            </h3>
+            <p className="font-tech text-xs text-slate-300 mt-2 leading-relaxed">
+              Watch official Future Fusion 2088 cinematic trailers, Deep Sea Megalodon teasers, audio waveform visualizers, and narrative gameplay previews.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              sound.playUiClick();
+              onLaunchCinema();
+            }}
+            className="mt-6 w-full py-3 rounded-xl font-cyber font-bold text-xs bg-slate-900 hover:bg-slate-800 border border-cyan-400/50 text-cyan-300 hover:text-white transition flex items-center justify-center gap-2 cursor-pointer"
+          >
+            WATCH 3D FUTURE VIDEOS
+          </button>
+        </div>
+
+        {/* File Vault & Export System Card */}
+        <div className="rounded-3xl border border-yellow-500/40 bg-slate-950 p-6 shadow-xl flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-cyber text-[10px] font-bold px-2.5 py-1 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-400/40 uppercase">
+                DOWNLOAD CENTER
+              </span>
+              <span className="font-tech text-xs text-yellow-400 font-bold">CLIENT EXPORT</span>
+            </div>
+            <h3 className="font-cyber text-xl font-black text-white">
+              FILE VAULT & OFFLINE DOWNLOADS
+            </h3>
+            <p className="font-tech text-xs text-slate-300 mt-2 leading-relaxed">
+              Download your VIP Player Passport (JSON), 3D Avatar Blueprint (JSON), Ledger statement (CSV), PWA offline package (JSON), and Master Game Guides (TXT).
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              sound.playUiClick();
+              onOpenFileVault();
+            }}
+            className="mt-6 w-full py-3 rounded-xl font-cyber font-bold text-xs bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-slate-950 shadow-[0_0_15px_rgba(255,215,0,0.3)] transition flex items-center justify-center gap-2 cursor-pointer"
+          >
+            OPEN FILE VAULT & DOWNLOADS
+          </button>
         </div>
       </div>
     </div>

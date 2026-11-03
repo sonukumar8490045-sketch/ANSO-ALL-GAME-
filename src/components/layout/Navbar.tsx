@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UserProfile } from '../../types';
 import { sound } from '../../services/sound';
-import { Gamepad2, Plus, Volume2, VolumeX, Shield, Crown, User, Wallet, Sparkles, Menu, X } from 'lucide-react';
+import { Gamepad2, Plus, Volume2, VolumeX, Shield, Crown, User, Wallet, Sparkles, Menu, X, Download, Film, Rocket, Flame } from 'lucide-react';
 
 interface NavbarProps {
   userCoins: number;
@@ -12,6 +12,7 @@ interface NavbarProps {
   onOpenVip: () => void;
   onOpenAdmin: () => void;
   onOpenAvatar: () => void;
+  onOpenFileVault: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -23,6 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenVip,
   onOpenAdmin,
   onOpenAvatar,
+  onOpenFileVault,
 }) => {
   const [muted, setMuted] = useState<boolean>(sound.getMuted());
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -36,8 +38,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'all', label: 'LOBBY' },
     { id: 'slots', label: '3D SLOTS' },
     { id: 'fishing', label: '3D FISHING' },
+    { id: 'racer', label: '3D RACER' },
+    { id: 'crash', label: 'CYBER CRASH' },
     { id: 'fusion', label: 'FUSION' },
-    { id: 'avatar', label: '3D AVATAR' },
+    { id: 'avatar', label: 'AVATAR' },
+    { id: 'cinema', label: '3D VIDEO' },
   ];
 
   return (
@@ -161,6 +166,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             {muted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-cyan-400" />}
           </button>
 
+          {/* File Vault & Download System Trigger */}
+          <button
+            onClick={() => {
+              sound.playUiClick();
+              onOpenFileVault();
+            }}
+            className="w-8 h-8 rounded-xl bg-slate-900 hover:bg-slate-800 border border-cyan-500/30 flex items-center justify-center text-cyan-400 hover:text-white transition"
+            title="File Vault & Downloads"
+          >
+            <Download className="w-4 h-4" />
+          </button>
+
           {/* Admin Dashboard Portal Toggle */}
           <button
             onClick={() => {
@@ -225,6 +242,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex-1 py-2 bg-slate-900 rounded-lg text-xs font-tech font-bold text-purple-400 text-center"
             >
               VIP REWARDS
+            </button>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenFileVault();
+              }}
+              className="flex-1 py-2 bg-cyan-950/80 border border-cyan-400/40 rounded-lg text-xs font-tech font-bold text-cyan-300 text-center"
+            >
+              FILES
             </button>
           </div>
         </div>
